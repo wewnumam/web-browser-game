@@ -14,7 +14,17 @@ matchingGame.deck = [
     "cardBJ",
 ];
 
+const MATCH_PATTERN_COUNT = 6;
+var currentMatchPatternCount = 0;
+var flipCount = 0;
+
+var startTime; // Variable to store the start time of the game
+var timerInterval; // Variable to store the interval ID for the timer
+var elapsedTime = 0;
+
 $(function () {
+    $("#sumbitForm").hide();
+
     matchingGame.deck.sort(shuffle);
     for (var i = 0; i < 11; i++) {
         $(".card:first-child").clone().appendTo("#cards");
@@ -43,6 +53,13 @@ $(function () {
     }
 
     function selectCard() {
+        if (flipCount == 0 ) {
+            startTimer();
+        }
+
+        flipCount++;
+        $("#flipcount").text("Flip: " + flipCount);
+
         // we do nothing if there are already two card flipped.
         if ($(".card-flipped").length > 1) {
             return;
@@ -60,6 +77,13 @@ $(function () {
                 .removeClass("card-flipped")
                 .addClass("card-removed");
             $(".card-removed").bind("transitionend", removeTookCards);
+
+            currentMatchPatternCount++;
+            $("#matchprogress").text("Match progress: " + currentMatchPatternCount + "/" + MATCH_PATTERN_COUNT);
+            if (isGameDone()) {
+                $("#sumbitForm").show();
+                clearInterval(timerInterval);
+            }
         } else {
             $(".card-flipped").removeClass("card-flipped");
         }
@@ -72,7 +96,51 @@ $(function () {
         return pattern === anotherPattern;
     }
 
+    function isGameDone() {
+        return currentMatchPatternCount >= MATCH_PATTERN_COUNT;
+    }
+
     function removeTookCards() {
         $(".card-removed").remove();
     }
+
+    // Function to start the timer
+    function startTimer() {
+        startTime = new Date().getTime();
+        timerInterval = setInterval(updateTimer, 1000); // Update timer every second
+    }
+
+    // Function to update and display the playtime
+    function updateTimer() {
+        var currentTime = new Date().getTime();
+        elapsedTime = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
+        $("#playtime").text("Playtime: " + elapsedTime + " seconds");
+    }
+
+    $('#submitButton').click(function () {
+        var record = {
+            'username': $('#username').val(),
+            'time': elapsedTime,
+            'flip': flipCount,
+            'created_at': Date.now()
+        };
+
+        if (isGameDone()) {
+            $.ajax({
+                url: 'index.php/record', // Replace with your server endpoint
+                method: 'POST',
+                data: record, // Data to send to the server
+                success: function (response) {
+                    // Handle the server response if needed
+                    console.log(record);
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors if any
+                    console.log('SUBMIT FAILED');
+                }
+            });
+
+            $("#sumbitForm").hide();
+        }
+    });
 });
