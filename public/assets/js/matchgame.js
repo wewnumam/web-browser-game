@@ -58,7 +58,7 @@ $(function () {
         }
 
         flipCount++;
-        $("#flipcount").text("Flip: " + flipCount);
+        $("#flipcount").text(flipCount + "x");
 
         // we do nothing if there are already two card flipped.
         if ($(".card-flipped").length > 1) {
@@ -79,7 +79,7 @@ $(function () {
             $(".card-removed").bind("transitionend", removeTookCards);
 
             currentMatchPatternCount++;
-            $("#matchprogress").text("Match progress: " + currentMatchPatternCount + "/" + MATCH_PATTERN_COUNT);
+            $("#matchprogress").text(currentMatchPatternCount + "/" + MATCH_PATTERN_COUNT);
             if (isGameDone()) {
                 $("#sumbitForm").show();
                 clearInterval(timerInterval);
@@ -114,7 +114,7 @@ $(function () {
     function updateTimer() {
         var currentTime = new Date().getTime();
         elapsedTime = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
-        $("#playtime").text("Playtime: " + elapsedTime + " seconds");
+        $("#playtime").text(elapsedTime + "s");
     }
 
     $('#submitButton').click(function () {
@@ -141,6 +141,12 @@ $(function () {
             });
 
             $("#sumbitForm").hide();
+            location.reload();
         }
     });
+
+    $("#refreshButton").click(function() {
+        // Reload or refresh the page
+        location.reload();
+      });
 });

@@ -12,7 +12,6 @@ body {
 #game {
     border-radius: 10px;
     border: 1px solid GRAY;
-    background: DARKGREEN url(../images/table.jpg);
     width: 500px;
     height: 460px;
     margin: 0 auto;
