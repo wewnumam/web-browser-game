@@ -23,7 +23,8 @@ var timerInterval; // Variable to store the interval ID for the timer
 var elapsedTime = 0;
 
 $(function () {
-    $("#sumbitForm").hide();
+    console.log(Date.now());
+    $("#inputModalButton").hide();
 
     matchingGame.deck.sort(shuffle);
     for (var i = 0; i < 11; i++) {
@@ -58,7 +59,7 @@ $(function () {
         }
 
         flipCount++;
-        $("#flipcount").text(flipCount + "x");
+        $(".flipcount").text(flipCount + "x");
 
         // we do nothing if there are already two card flipped.
         if ($(".card-flipped").length > 1) {
@@ -81,7 +82,10 @@ $(function () {
             currentMatchPatternCount++;
             $("#matchprogress").text(currentMatchPatternCount + "/" + MATCH_PATTERN_COUNT);
             if (isGameDone()) {
-                $("#sumbitForm").show();
+                $("#inputModalButton").show();
+                $("#inputModalButton").click();
+                $(".playtime").text(elapsedTime + "s");
+                $(".flipcount").text(flipCount + "x");
                 clearInterval(timerInterval);
             }
         } else {
@@ -114,7 +118,7 @@ $(function () {
     function updateTimer() {
         var currentTime = new Date().getTime();
         elapsedTime = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
-        $("#playtime").text(elapsedTime + "s");
+        $(".playtime").text(elapsedTime + "s");
     }
 
     $('#submitButton').click(function () {
@@ -139,8 +143,8 @@ $(function () {
                     console.log('SUBMIT FAILED');
                 }
             });
-
-            $("#sumbitForm").hide();
+            
+            $("#inputModalButton").hide();
             location.reload();
         }
     });
