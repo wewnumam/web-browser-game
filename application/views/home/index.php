@@ -31,6 +31,11 @@ function timeAgo($timestamp)
 </head>
 
 <body>
+    <!-- Splash Screen -->
+    <div class="splash">
+        <h1 class="splash-header">Memory Game</h1>
+    </div>
+
     <header>
     </header>
 
@@ -134,6 +139,16 @@ function timeAgo($timestamp)
     <script src="https://kit.fontawesome.com/039daba6d2.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="<?= base_url('public/assets/js/matchgame.js'); ?>"></script>
+    <script>
+        var splashScreen = document.querySelector('.splash');
+        splashScreen.addEventListener('click', () => {
+            splashScreen.style.opacity = 0;
+            setTimeout(() => {
+                splashScreen.classList.add('hidden')
+            }, 610)
+        })
+    </script>
+
 </body>
 
 </html>
