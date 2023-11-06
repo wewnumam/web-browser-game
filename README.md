@@ -4,9 +4,9 @@
 1. Install XAMPP 7.4.8 or higher
 2. Copy this folder to `YOURINSTALLLOCATION/xampp/htdocs/`
 3. Start Apache & MySQL in XAMPP Control Panel
-4. Open http://localhost/phpmyadmin/server_sql.php, copy query text from wbg.sql to query box, then click Go
+4. Open http://localhost/phpmyadmin/server_sql.php, copy query text from [match_game.sql](./match_game.sql) to query box, then click Go
 5. Done.
-
+`
 ## Table Structure
 ### Record
 \# | name | type | extra
@@ -19,7 +19,7 @@
 
 ## API Spec
 ### Create Record
-Request:
+#### Request:
 - Method: POST
 - Endpoint: `system/create.php`
 - Header:
@@ -33,7 +33,7 @@ Request:
     "created_at": "long, unixtime"
 }
 ```
-Response:
+#### Response:
 ```json
 {
   "status": "integer, status code",
