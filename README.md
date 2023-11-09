@@ -1,13 +1,46 @@
 # Match Game
 
-## Localhost Installation
-1. Install XAMPP 7.4.8 or higher
-2. Copy this folder to `YOURINSTALLLOCATION/xampp/htdocs/`
-3. Start Apache & MySQL in XAMPP Control Panel
-4. Open http://localhost/phpmyadmin/server_sql.php, copy query text from [match_game.sql](./match_game.sql) to query box, then click Go
-5. Done.
-`
-## Table Structure
+## Latar Belakang
+Game ini merupakan game kasual populer yang biasa dikenal sebagai memory game. Pengembangan game ini terinspirasi dari buku ..., beberapa bertimbangan kami memilih game ini sebagai berikut:
+- gameplay lebih umum/mudah dipahami dibanding game lain
+- controller sederhana (point and click)
+- dapat dikemas untuk kebutuhan iklan (advertgame)
+
+Namun ada beberapa kekurangan yang perlu diperbaiki dari refrensi game dari buku seperti:
+- versi JQuery usang
+- belum ada mekanik progression (best time, best flip, leaderboard
+## Konsep
+Elemen | Deskripsi
+--- | ---
+Goals | Memasangkan 2 kartu yang sama.
+Interaction | Klik kartu untuk membaliknya.
+Obstacle | Kartu akan ditutup kembali setelah 2 kali kartu dibalik.
+Rules | Peringkat pemain diurutkan berdasarkan durasi tercepat.
+
+## Teknologi yang Digunakan
+- **HTML** digunakan sebagai kanvas game.
+- **CSS** digunakan untuk mendesain visual game.
+	- **Bootstrap** digunakan untuk mempercepat pengembangan.
+- **Javascript** digunakan untuk memprogram algoritma game.
+	- **jQuery** digunakan untuk membantu menyederhanakan kode Javascript.
+- **PHP** digunakan untuk mengolah dan mengontrol data antara pemain dan database.
+- **MySQL** digunakan untuk menyimpan data hasil permainan pemain.
+
+## Penggunaan
+### Instalasi Host Lokal
+1. Instal XAMPP 7.4.8 atau yang lebih tinggi
+2. Salin folder ini ke `xampp/htdocs/`
+3. Mulai Apache & MySQL di  XAMPP Control Panel
+4. Buka http://localhost/phpmyadmin/server_sql.php, salin teks query dari [match_game.sql](./match_game.sql) ke kotak query, lalu klik Go
+5. Selesai.
+
+### Akses
+Game ini bisa dimainkan di:
+- http://wbg-smt5.rf.gd/ atau
+- http://wewnumam.infinityfreeapp.com/
+> Jika terjadi error `ERR_SSL_PROTOCOL_ERROR`, ganti `https://` menjadi `http://` `
+## Struktur Tabel
+Tidak ada proses autentikasi. Tidak ada hubungan kolom karena kami hanya menggunakan satu kolom.
 ### Record
 \# | name | type | extra
 --- | --- | --- | --- 
